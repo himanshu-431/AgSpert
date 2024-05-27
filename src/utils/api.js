@@ -5,7 +5,11 @@ const mockDatabase = {
 // Mimic fetching an event
 const fetchEvent = async (eventId) => {
     await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
-    return mockDatabase.events.find((event) => event.id === eventId);
+    const event = mockDatabase.events.find((event) => event.id === eventId);
+    if (!event) {
+        throw new Error('Event not found');
+    }
+    return event;
 };
 
 // Mimic creating an event
